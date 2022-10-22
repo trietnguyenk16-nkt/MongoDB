@@ -1,0 +1,289 @@
+Source: https://viblo.asia/p/mongodb-la-gi-co-so-du-lieu-phi-quan-he-bJzKmgoPl9N
+https://blog.vinahost.vn/mongodb-la-gi
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
+https://www.mongodb.com/docs/mongodb-shell/
+https://stackjava.com/huong-dan-mongodb-code-vi-du-java-mongodb
+https://www.mongodb.com/docs/manual/reference (reference - manual cheatsheet)
+https://www.w3resource.com/mongodb-exercises/ (practice)
+https://codingonly4u.blogspot.com/2018/07/mongodb-exercises-practice-solution.html (practice)
+http://nicholasjohnson.com/mongo/course/workbook/ (reference + practice)
+1/ MongoDB:
+- Hệ quản trị CSDL, CSDL thuộc NoSql ( No-relational SQL / Not Only SQL). 
+- MEAN stack (MongoDB, Express, AngularJS, NodeJS) đang dần thay thế cho LAMP stack (Linux, Apache, MySQL, PHP/Python).
+- MongoDB (chữ mongo được lấy từ “humongous” trong tiếng Anh, nghĩa là “khổng lồ”), là một NoSQL database. Khác với MySQL hay các loại SQL databse khác chạy theo mô hình database – table – row với số dòng – cột nhất định, schema phức tạp, và phải sử dụng nhiều JOIN khi query. 
+- MongoDB chạy theo mô hình database – collection – document, thay thế mô hình cơ sở dữ liệu dùng table truyền thống bằng các document với định dạng JSON với cấu trúc linh hoạt hơn (MongoDB gọi là BSON).
+2/ What is NoSQL:
+- NoSQL là 1 dạng CSDL mã nguồn mở và được viết tắt bởi: None-Relational SQL hay có nơi thường gọi là Not-Only SQL. CSDL phi quan hệ
+- NoSQL được phát triển trên Javascript Framework với kiểu dữ liệu là JSON và dạng dữ liệu theo kiểu key và value.
+- NoSQL ra đời như là 1 mảnh vá cho những khuyết điểm và thiếu xót cũng như hạn chế của mô hình dữ liệu quan hệ RDBMS (Relational Database Management System - Hệ quản trị cơ sở dữ liệu quan hệ) về tốc độ, tính năng, khả năng mở rộng,...
+- Với NoSQL bạn có thể mở rộng dữ liệu mà không lo tới những việc như tạo khóa ngoại, khóa chính, kiểm tra ràng buộc .v.v ...
+- NoSQL bỏ qua tính toàn vẹn của dữ liệu và transaction để đổi lấy hiệu suất nhanh và khả năng mở rộng.
+3/ What is MongoDB:
+- MongoDB là một hệ quản trị cơ sở dữ liệu mã nguồn mở, là CSDL thuộc NoSql
+- MongoDB là một database hướng tài liệu (document), các dữ liệu được lưu trữ trong document kiểu JSON thay vì dạng bảng như CSDL quan hệ nên truy vấn sẽ rất nhanh.
+- Với CSDL quan hệ chúng ta có khái niệm bảng, các cơ sở dữ liệu quan hệ (như MySQL hay SQL Server...) sử dụng các bảng để lưu dữ liệu thì với MongoDB chúng ta sẽ dùng khái niệm là collection thay vì bảng
+- So với RDBMS thì trong MongoDB collection ứng với table, còn document sẽ ứng với row , MongoDB sẽ dùng các document thay cho row trong RDBMS.
+- Các collection trong MongoDB được cấu trúc rất linh hoạt, cho phép các dữ liệu lưu trữ không cần tuân theo một cấu trúc nhất định.
+- Thông tin liên quan được lưu trữ cùng nhau để truy cập truy vấn nhanh thông qua ngôn ngữ truy vấn MongoDB
+4/ Advantage of MongoDB:
+- Do MongoDB sử dụng lưu trữ dữ liệu dưới dạng Document JSON nên mỗi một collection sẽ có các kích cỡ và các document khác nhau, linh hoạt trong việc lưu trữ dữ liệu, nên bạn muốn gì thì cứ insert vào thoải mái.
+- Dữ liệu trong MongoDB không có sự ràng buộc lẫn nhau, không có join như trong RDBMS nên khi insert, xóa hay update nó không cần phải mất thời gian kiểm tra xem có thỏa mãn các ràng buộc dữ liệu như trong RDBMS.
+- MongoDB rất dễ mở rộng (Horizontal Scalability). Trong MongoDB có một khái niệm cluster là cụm các node chứa dữ liệu giao tiếp với nhau, khi muốn mở rộng hệ thống ta chỉ cần thêm một node với vào cluster:
+- Trường dữ liệu “_id” luôn được tự động đánh index (chỉ mục) để tốc độ truy vấn thông tin đạt hiệu suất cao nhất.
+- Khi có một truy vấn dữ liệu, bản ghi được cached lên bộ nhớ Ram, để phục vụ lượt truy vấn sau diễn ra nhanh hơn mà không cần phải đọc từ ổ cứng.
+- Hiệu năng cao: Tốc độ truy vấn (find, update, insert, delete) của MongoDB nhanh hơn hẳn so với các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS). Với một lượng dữ liệu đủ lớn thì thử nghiệm cho thấy tốc độ insert của MongoDB có thể nhanh tới gấp 100 lần so với MySQL.
+5/ Disadvantage of MongoDB:
+- Một ưu điểm của MongoDB cũng chính là nhược điểm của nó. MongoDB không có các tính chất ràng buộc như trong RDBMS nên khi thao tác với mongoDB thì phải hết sức cẩn thận.
+- Tốn bộ nhớ do dữ liệu lưu dưới dạng key-value, các collection chỉ khác về value do đó key sẽ bị lặp lại. Không hỗ trợ join nên dễ bị dữ thừa dữ liệu.
+- Khi insert/update/remove bản ghi, MongoDB sẽ chưa cập nhật ngay xuống ổ cứng, mà sau 60 giây MongoDB mới thực hiện ghi toàn bộ dữ liệu thay đổi từ RAM xuống ổ cứng điêù này sẽ là nhược điểm vì sẽ có nguy cơ bị mất dữ liệu khi xảy ra các tình huống như mất điện...
+6/ When to use MongoDB
+- Ví dụ như các hệ thống realtime (thời gian thực) yêu cầu phản hồi nhanh, 
+- Các hệ thống bigdata với yêu cầu truy vấn nhanh hay các hệ thống có lượng request lớn thì MongoDB sẽ là sự lựa chọn ưu tiên hơn CSDL quan hệ. 
+- Tùy theo dự án và trường hợp cụ thể để sử dụng CSDL quan hệ hay sử dụng MongoDB đem lại hiệu quả cao.
+- Một số use case phổ biến của MongoDB là Hệ thống quản lý nội dung số, Các hệ thống phân tích dữ liệu lớn, Quản lý danh mục các sản phẩm trong thương mại điên tử, các ứng dụng social…
+7/ Các khái niệm cơ bản trong MongoDB
+- Database
+Database chính là tập chứa các collection trong MongoDB. Mỗi database sẽ có một tập file riêng của mình trên file system của hệ thống. Một MongoDB server thường chứa nhiều database trên đó.
+
+- Collection
+Tương tự như Table trong MySQL, Collection là một tập chứa các MongoDB Document. Một điểm khác so với các RDBMS khác đó chính là Collection không bắt buộc một schema cố định nào cả. Các document trong cùng một collection có thể có nhiều field khác nhau. Nhưng thường thì các document trong một collection sẽ có một số field chính tương đồng nhau và có liên quan với nhau.
+
+- Document
+Document là một tập dữ liệu theo dạng key-value, mỗi key sẽ tương ứng với một value. Các document khá linh hoạt về schema, như đã nói ở trên, các document trong cùng một collection không nhất thiết phải có các field hoặc cấu trúc giống nhau. Data trong cùng một field cũng có thể có nhiều kiểu dữ liệu khác nhau.
+
+Ví dụ: field name của document này có thể là string, nhưng ở document khác có thể có kiểu là array, dù 2 document đó cùng nằm chung 1 collection.
+
+==> Túm lại là, có thể tạm coi collection như table, document như row cho dễ hình dung. Nhưng mô hình collection, document linh hoạt hơn so với table – row do có ít schema hơn.
+
+Đối với những ai đã xài MySQL mới chuyển qua làm quen MongoDB, các bạn có thể xem thêm bảng so sánh sau để dễ hiểu hơn:
+
+RDBMS:							MongoDB:
++ Database						+ Database
++ Table							+ Collection
++ Tuple/Row						+ Document
++ Column						+ Field
++ Table Join					+ Embedded Documents
++ Primary Key					+ Primary Key (MongoDB tự tạo Primary key là “_id“)
+Database Server và Client:
++ Mysqld/Oracle					+ mongod (server)
++ mysql/sqlplus					+ mongo (client)
+
+8/ JSON:
+- Các document của MongoDB sử dụng format JSON (JavaScript Object Notation), đây là một chuẩn lưu trữ, trao đổi dữ liệu đơn giản và gọn nhẹ. Với ưu điểm dễ đọc, dễ hiểu, đa phần các ngôn ngữ lập trình phổ biến hiện nay đều hỗ trợ JSON như: C, C++, C#, Java, JavaScript, Perl, Python,….
+- Dữ liêu trong JSON được lưu trữ dưới dạng key/value. Một key sẽ tương ứng với 1 value. Value ở đây có thể là một mảng, một chuỗi, một số int, double, mảng hoặc object…
+
+9/ When not to use MongoDB:
+- Hệ thống cần xử lý nhiều transaction như các giao dịch mua bán, chuyển tiền, ngân hàng. Đối với các trường hợp này thì SQL phù hợp hơn hẳn!
+- Cần sử dụng đến các lệnh JOIN.
+10/ How to install and use Mongo DB
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
+https://www.mongodb.com/docs/mongodb-shell/
+https://stackjava.com/huong-dan-mongodb-code-vi-du-java-mongodb
+
+11/ Note
+- To start local mongo db server:
+Way 1: Start MongoDB Community Edition as a Windows Service
+To start/restart the MongoDB service, use the Services console:
+From the Services console, locate the MongoDB service.
+Right-click on the MongoDB service and click Start.
+
+Way 2: Run MongoDB Community Edition from the Command Interpreter 
+You can run MongoDB Community Edition from the 
+Windows command prompt/interpreter
+ (cmd.exe) instead of as a service.
++ Open CMD
++ "C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe" --dbpath="c:\data\db"
+The 
+--dbpath
+ option points to your database directory.
+
+If the MongoDB database server is running correctly, the Command Interpreter displays:
+
+[initandlisten] waiting for connections
+
+Add MongoDB binaries to the System PATH
+If you add C:\Program Files\MongoDB\Server\6.0\bin to your System PATH you can omit the full path to the MongoDB Server binaries. You should also add the path to 
+mongosh
+ if you have not already done so.
+ 
+- To start MongoDB shell
++ The MongoDB Shell, mongosh, is a fully functional JavaScript and Node.js 16.x REPL environment for interacting with MongoDB deployments.
++ You can use the MongoDB Shell to test queries and operations directly with your database.
++ Be sure to add the path to your mongosh.exe binary to your PATH environment variable during installation.
++ Open a new Command Interpreter and enter mongosh.exe to connect to MongoDB.
+
+- Mongo DB UI: MongoDB compass (installed together with MongoDB)
+
+
+12/ MongoDB cheatsheet
+a/ db.collection.find(): https://www.mongodb.com/docs/manual/reference/method/db.collection.find/
+b/ Comparision operator: https://www.mongodb.com/docs/manual/reference/operator/query-comparison/
+c/ $elemMatch: https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/#:~:text=Definition,-%24elemMatch&text=The%20%24elemMatch%20operator%20matches%20documents,all%20the%20specified%20query%20criteria.
+d/ insert new document ( row): https://www.mongodb.com/docs/manual/reference/method/db.collection.insert/
+Ex: db.products.insert( { item: "card", qty: 15 } )
+=> create a document with item:'card' and qty:15
+e/ update existing field: https://www.mongodb.com/docs/manual/reference/method/db.collection.update/#std-label-update-method-update-document
+Ex: if we have a document with field item:'card' and you want to update it to item:'money'
+use update with $set
+db.products.update({filter}, {$set:{"item":"money"}})
+to update multi use multi document
+db.products.update({filter}, {$set:{"item":"money"}}, {multi:true})
+f/ update new field: https://www.mongodb.com/docs/manual/reference/method/db.collection.update/#std-label-update-method-update-document
+Ex: if we have a document with no field item and you want to update it to item:'money'
+use update with $set
+db.products.update({filter}, {$set:{"item":"money"}})
+g/ increase/decrease number in a field: https://www.mongodb.com/docs/manual/reference/method/db.collection.update/#std-label-update-method-update-document
+Ex: if we have a document with  field no:12 and you want to increase it to 3 (no = no + 3 =15)
+use update with $inc
+db.products.update({filter}, {$inc:{"no":3}})
+=> no:15
+h/ delete an existing field: https://www.mongodb.com/docs/manual/reference/operator/update/unset/
+db.collections.update({filter},{$unset:{"field_to_remove":""}})
+ex: db.products.update(
+   { sku: "unknown" },
+   { $unset: { quantity: "", instock: "" } }
+)
+
+=> find sku = unknown and delete quantity, instock
+i/ remove a document: https://www.mongodb.com/docs/manual/reference/method/db.collection.remove/
+j/ Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Wil' as first three letters for its name.
+db.restaurants.find(
+{name: /^Wil/},
+{
+"restaurant_id" : 1,
+"name":1,"borough":1,
+"cuisine" :1
+}
+);
+k/  Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'ces' as last three letters for its name.
+db.restaurants.find(
+{name: /ces$/},
+{
+"restaurant_id" : 1,
+"name":1,"borough":1,
+"cuisine" :1
+}
+);
+l/ Write a MongoDB query to find the restaurant Id, name, borough and cuisine for those restaurants which contain 'Reg' as three letters somewhere in its name. 
+db.restaurants.find(
+{"name": /.*Reg.*/},
+{
+"restaurant_id" : 1,
+"name":1,"borough":1,
+"cuisine" :1
+}
+);
+
+m/Cursor Methods: https://www.mongodb.com/docs/manual/reference/method/js-cursor/
+n/ update field with upsert: https://www.mongodb.com/docs/manual/reference/method/db.collection.update/#std-label-update-method-update-document
+Ex: db.products.update({filter}, {$set:{"item":"money"}}, {upsert: true})
+=> if filter returns result => update this document with item:money
+=> if filter does not return result => create new document with item:money and auto generate new ObjectId
+db.documents.update({filter}, {$set:{"item":"money"}}, {upsert:false})
+=> if filter returns result => update this document with item:money
+=> if filter does not return result => do not create new document4
+default value is upsert:false
+o/ group: https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/
+p/ match: https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/
+
+
+14/ STEPS TO SET UP REPLICATE SET
+Pre: install mongod and mongosh in each machines, set mongod and mongosh system variables in each machines
+
+Steps:
+1) Make sure machines (nodes) which will be in replicate set can see (ping) to each others
+If machines are in the wifi network and cannot ping to each other
+Do instruction in this link https://kb.iu.edu/d/aopy (also do the same for outbound rule)
+Remember to turn off firewall (EX: firewall in Mcaffee antivirus)
+=> machines are in the wifi network and can ping to each other
+2) Go to this link and read through the steps: https://www.mongodb.com/docs/manual/tutorial/deploy-replica-set/
+NOTE: the steps below are in the link in 2). So if want more info, refer to the link in 2)
+
+3) The following mongod instance binds to both the localhost and the hostname My-Example-Associated-Hostname, which is associated with the IP address 198.51.100.1:
+mongod --bind_ip localhost,My-Example-Associated-Hostname
+
+In order to connect to this instance, remote clients must specify the hostname or its associated IP address 198.51.100.1:
+mongosh --host My-Example-Associated-Hostname
+mongosh --host 198.51.100.1
+
+NOTE: to know hostname of computer: open cmd and type hostname 
+4) For each member, start a mongod instance with the following settings:
+
+Set replication.replSetName option to the replica set name. If your application connects to more than one replica set, each set must have a distinct name.
+
+Set net.bindIp option to the hostname/ip or a comma-delimited list of hostnames/ips.
+
+Set any other settings as appropriate for your deployment.
+
+Example: mongod --replSet "rs0" --bind_ip localhost,<hostname(s)|ip address(es)>
+
+Alternatively, you can also specify the replica set name and the ip addresses in a configuration file:
+
+replication:
+   replSetName: "rs0"
+net:
+   bindIp: localhost,<hostname(s)|ip address(es)>
+   
+To start mongod with a configuration file, specify the configuration file's path with the --config option:
+
+mongod --config <path-to-config>
+   
+5) 
+Connect mongosh to one of the mongod instances
+
+6) Initiate the replica set.
+From mongosh, run rs.initiate() on replica set member 0 (primary)
+
+rs.initiate( {
+   _id : "rs0",
+   members: [
+      { _id: 0, host: "mongodb0.example.net:27017" },
+      { _id: 1, host: "mongodb1.example.net:27017" },
+      { _id: 2, host: "mongodb2.example.net:27017" }
+   ]
+})
+
+7) View the replica set configuration.
+Use rs.conf() to display the replica set configuration object:
+
+rs.conf()
+
+8) Ensure that the replica set has a primary.
+Use rs.status() to identify the primary in the replica set.
+
+15/ Commands to be used to starts mongod instance with configuration files
+mongod --config "C:\Program Files\MongoDB\Server\6.0\bin\mongod.cfg"
+
+mongod --config D:\LearningAndProjects\MongoDB\replication\configs\mongod1.cfg
+
+mongod --config "D:\LearningAndProjects\MongoDB\repliOverNetwork\arbiterConf\mongod.cfg"
+mongod --config "D:\LearningAndProjects\MongoDB\repliOverNetwork\secondaryConf\mongod.cfg"
+
+16/ Reconfig attempt to install a config that would change the implicit default write concern.
+Use the setDefaultRWConcern command to set
+ rs.add(  
+    {
+   _id: 3,
+   host: DESKTOP-TRIET:37017,        // required
+   arbiterOnly: false,
+   buildIndexes: true,
+   hidden: false,
+   priority: 0.5,
+   tags: {},
+   secondaryDelaySecs: Long("0"),
+   votes: 1
+})
+
+
+
+INVESTIGATE and INPROGRESS:
+1/ Should use mongodb via command line or service?
+2/ How to query db.people.find() in mongosh.exe
+3/ How to resolve this "2022-09-10T16:45:28.921+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted"
+How to enable access control? DONE
+4/ How to know mongosh.exe connect to correct our local mongodb server and mongo database? DONE
+5/ Check if our document data insert in mongodb compass correct or not?
+
+CURRENTLY: MONGODB SERVICE IS AUTOMATICALLY RUNNING (AS WE INSTALLED). IF WE WANT TO USE MONGODB STARTED BY COMMANDLINE, STOP MONGODB SERVICE
+
+

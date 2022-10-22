@@ -1,0 +1,26 @@
+mongod --config "C:\Program Files\MongoDB\Server\6.0\bin\mongod.cfg"
+mongod --config D:\LearningAndProjects\MongoDB\repliOverNetwork\conf\mongod.cfg
+
+mongod --config D:\LearningAndProjects\MongoDB\replication\configs\mongod1.cfg
+
+mongod --config "D:\LearningAndProjects\MongoDB\repliOverNetwork\arbiterConf\mongod.cfg"
+mongod --config "D:\LearningAndProjects\MongoDB\repliOverNetwork\secondaryConf\mongod.cfg"
+
+mongosh --host 192.168.1.222:27017 --primary
+mongosh --host 192.168.1.222:37017 --secondary
+mongosh --host 192.168.1.222:47017 --arbiter
+
+   Reconfig attempt to install a config that would change the implicit default write concern.
+   Use the setDefaultRWConcern command to set
+ rs.add(  
+    {
+   _id: 3,
+   host: DESKTOP-TRIET:37017,        // required
+   arbiterOnly: false,
+   buildIndexes: true,
+   hidden: false,
+   priority: 0.5,
+   tags: {},
+   secondaryDelaySecs: Long("0"),
+   votes: 1
+})
